@@ -350,7 +350,7 @@ namespace Proj_POG_OnTheFly
             } while (true);
         }
 
-        #endregion
+        #endregion 
 
         #endregion
         static void Pausa() // OK 
