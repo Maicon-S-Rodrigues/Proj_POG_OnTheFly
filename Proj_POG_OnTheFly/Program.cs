@@ -8,7 +8,7 @@ namespace Proj_POG_OnTheFly
         #region TELAS
         static void TelaInicial() // INCOMPLETO 
         {
-            int opc;
+            int opc = 0;
             do
             {
                 Console.Clear();
@@ -20,7 +20,6 @@ namespace Proj_POG_OnTheFly
                 Console.WriteLine(" 4 - Acesso a Lista de CPF Restritos\n");
                 Console.WriteLine(" 5 - Acesso a Lista de CNPJ Restritos");
                 Console.WriteLine("\n 0 - Encerrar Sessão\n");
-                Console.Write("\nOpção: ");
                 opc = int.Parse(Console.ReadLine()); // opc = int.Parse(ValidarEntrada("menu"));
 
                 switch (opc)
@@ -36,6 +35,7 @@ namespace Proj_POG_OnTheFly
                     case 1:
 
                         // Chamar a tela de Companhias Aereas
+                        TelaInicialCompanhiasAereas();
 
                         break;
 
@@ -54,12 +54,14 @@ namespace Proj_POG_OnTheFly
                     case 4:
 
                         // Chamar a tela para ver os CPF's Restritos
+                        TelaInicialCpfRestritos();
 
                         break;
 
                     case 5:
 
                         // Chamar a tela para ver os CNPJ's Restritos
+                        TelaInicialCnpjRestritos();
 
                         break;
                 }
@@ -196,60 +198,45 @@ namespace Proj_POG_OnTheFly
             // segue para as vendas ||| se uma das duas não for verdadeira retornara para tela anterior depois de uma mensagem com o motivo.
         }
 
-        static void TelaCadastrarPassageiro() // OK ~ Falta Acertar o uso das funções e liberar as partes comentadas * 
+        static void TelaCadastrarPassageiro() // OK ! Só dar um 'CTRL+K+U' em tudo pra tirar os comentarios 
         {
             do
             {
                 // variaveis locais
-                string nome, cpf;
-                DateTime dataNascimento;
-                char sexo;
+                //string nome, cpf;
+                //string dataNascimento;
+                //char sexo;
+
                 // Passageiro novoPassageiro;
 
-                Console.Clear();
-                Console.WriteLine("\nCADASTRO DE PASSAGEIRO");
-                Console.Write("\n\nInforme o 'Nome': ");
-                nome = Console.ReadLine(); // nome = ValidarEntrada("nome");
-                if (nome == null) TelaInicialPassageiros();
+                //nome = ValidarEntrada("nome");
+                //if (nome == null) TelaInicialPassageiros();
 
-                Console.Write("\nInforme o 'CPF': ");
-                cpf = Console.ReadLine(); // cpf = ValidarEntrada("cpf");   /// OBS: Precisa validar se o 'CPF' já existe na lista de cadastros!
-                if (cpf == null) TelaInicialPassageiros();
+                //cpf = ValidarEntrada("cpf");   /// OBS: Precisa validar se o 'CPF' já existe na lista de cadastros!
+                //if (cpf == null) TelaInicialPassageiros();
 
-                Console.Write("\nInforme a 'Data de Nascimento': ");
-                dataNascimento = DateTime.Parse(Console.ReadLine()); // dataNascimento = DateTime.Parse(ValidarEntrada("datanascimento"));
-                if (dataNascimento == null) TelaInicialPassageiros();
+                //dataNascimento = ValidarEntrada("datanascimento");
+                //if (dataNascimento == null) TelaInicialPassageiros();
 
-                Console.Write("\nInforme o 'Sexo': ");
-                Console.Write("\n [ F ] - Feminino");
-                Console.Write("\n [ M ] - Masculino");
-                Console.Write("\n [ N ] - Não informar");
-                Console.Write("\nOpção: ");
-                sexo = char.Parse(Console.ReadLine()); // sexo = char.Parse(ValidarEntrada("sexo"));
-                if (sexo.Equals(null)) TelaInicialPassageiros();
+                //sexo = char.Parse(ValidarEntrada("sexo"));
+                //if (sexo.Equals(null)) TelaInicialPassageiros();
 
-
-                // PRECISA DECIDIR COMO VAI SER ENVIADO O PARAMETRO PARA A FUNÇÃO DE GRAVAR:
-                //--------------------------------------------
-                // novoPassageiro = new Passageiro(cpf, nome, dataNascimento, sexo);
-                //--------------------------------------------
-                // GravarPassageiro(novoPassageiro);
-                //--------------------------------------------
-                // passageiros.ADD(novoPassageiro);
-                // GravarPassageiro(passageiros);
-                //--------------------------------------------
                 Console.WriteLine("\nPassageiro Cadastrado com Sucesso!");
+                //Passageiro passageiro = new Passageiro(cpf, nome, DateConverter(dataNascimento), sexo, System.DateTime.Now, System.DateTime.Now, 'A');
+                //listPassageiro.Add(passageiro);
+                //GravarPassageiro(listPassageiro);
                 Pausa();
                 TelaInicialPassageiros();
 
             } while (true);
         }
 
-        static void TelaEditarPassageiro(/*Passageiro passageiroAtivo*/) // INCOMPLETO 
+        static void TelaEditarPassageiro(/*Passageiro passageiroAtivo*/) // OK ~ Falta Acertar o uso das funções e liberar as partes comentadas * 
         {
             int opc;
             string novoNome;
-            DateTime novaDataNascimento;
+            string novaDataNascimento;
+            DateTime data;
             char novoSexo;
             char novaSituacao;
 
@@ -262,7 +249,8 @@ namespace Proj_POG_OnTheFly
                 Console.Write("\n 2 - Data de Nascimento");
                 Console.Write("\n 3 - Sexo");
                 Console.Write("\n 4 - Situação (Ativo / Inativo");
-                Console.Write("\n 0 - VOLTAR");
+                Console.Write("\n 0 - Voltar");
+                Console.WriteLine("\nOpção: ");
                 opc = int.Parse(Console.ReadLine()); // opc = int.Parse(ValidarEntrada("menu"));
 
                 switch (opc)
@@ -277,11 +265,13 @@ namespace Proj_POG_OnTheFly
 
                         Console.Clear();
                         Console.WriteLine("\nNome Atual: " /* + passageiroAtivo.Nome*/);
-                        Console.Write("\n\nInforme o Novo Nome: ");
+                        Console.Write("\n\nInforme o Novo Nome");
+                        Pausa();
                         //novoNome = ValidarEntrada("nome");
                         //if (novoNome == null) TelaEditarPassageiro(passageiroAtivo);
 
                         //passageiroAtivo.Nome = novoNome;
+                        Console.Clear();
                         Console.WriteLine("\nNome Alterado com Sucesso!");
                         Pausa();
                         TelaEditarPassageiro(/*passageiroAtivo*/);
@@ -292,11 +282,13 @@ namespace Proj_POG_OnTheFly
 
                         Console.Clear();
                         Console.WriteLine("\nData de nascimento Atual: "/* + passageiroAtivo.DataNascimento.ToShortDateString()*/);
-                        Console.Write("\n\nInforme a Nova Data de Nascimento: ");
-                        //novaDataNascimento = DateTime.Parse(ValidarEntrada("datanascimento"));
+                        Console.Write("\n\nInforme a Nova Data de Nascimento");
+                        Pausa();
+                        //novaDataNascimento = ValidarEntrada("datanascimento")
                         //if (novaDataNascimento == null) TelaEditarPassageiro(passageiroAtivo);
-
-                        //passageiroAtivo.DataNascimento = novaDataNascimento;
+                        //data = DateConverter(novaDataNascimento);
+                        //passageiroAtivo.DataNascimento = data;
+                        Console.Clear();
                         Console.WriteLine("\nData de Nascimento Alterada com Sucesso!");
                         Pausa();
                         TelaEditarPassageiro(/*passageiroAtivo*/);
@@ -309,15 +301,12 @@ namespace Proj_POG_OnTheFly
                         {
                             Console.Clear();
                             Console.WriteLine("\nSexo Atual: " /* + passageiroAtivo.Sexo*/);
-                            Console.Write("\n\nInforme o Novo Sexo: ");
-                            Console.Write("\n [ F ] - Feminino");
-                            Console.Write("\n [ M ] - Masculino");
-                            Console.Write("\n [ N ] - Não informar");
-                            Console.Write("\nOpção: ");
+                            Console.Write("\n\nInforme o Novo Sexo");
+                            Pausa();
                             //novoSexo = char.Parse(ValidarEntrada("sexo"));
                             //if (novoSexo.Equals(null)) TelaInicialPassageiros();
-
                             //passageiroAtivo.Sexo = novoSexo;
+                            Console.Clear();
                             Console.WriteLine("\nSexo Alterado com Sucesso!");
                             Pausa();
                             TelaEditarPassageiro(/*passageiroAtivo*/);
@@ -327,16 +316,18 @@ namespace Proj_POG_OnTheFly
 
                         Console.Clear();
                         Console.WriteLine("\nPASSAGEIRO: " /*passageiroAtivo.Nome*/);
-                        //if (passageiroAtual.Situacao == 'A')
+                        //if (passageiroAtivo.Situacao == 'A')
                         { Console.WriteLine("\nSituação Atual: ATIVO"); }
-                        //if (passageiroAtual.Situacao == 'I')
+                        //if (passageiroAtivo.Situacao == 'I')
                         { Console.WriteLine("\nSituação Atual: INATIVO"); }
+                        Pausa();
 
                         //novaSituacao = char.Parse(ValidarEntrada("situacao"));
                         //if (novaSituacao.Equals(null)) TelaInicialPassageiros();
 
                         //passageiroAtivo.Situacao = novaSituacao;
-                        Console.WriteLine("\nSexo Alterado com Sucesso!");
+                        Console.Clear();
+                        Console.WriteLine("\nSituação de Cadastro Alterada com Sucesso!");
                         Pausa();
                         TelaEditarPassageiro(/*passageiroAtivo*/);
                         break;
@@ -345,8 +336,160 @@ namespace Proj_POG_OnTheFly
             } while (true);
         }
 
-        #endregion 
+        #endregion
 
+        #region TELAS_ARQUIVOS_BLOQUEADOS
+        static void TelaInicialCpfRestritos() // falta adicionar as funções aqui (busca,adicionar, retirar, mostrar lista)
+        {
+            int opc = 0;
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("\n'CPF' RESTRITOS");
+                Console.WriteLine("\nInforme a Opção Desejada:\n");
+                Console.WriteLine(" 1 - Ver a Lista de 'CPF' Restritos\n");
+                Console.WriteLine(" 2 - Adicionar um 'CPF' à Lista de Restritos\n");
+                Console.WriteLine(" 3 - Remover um 'CPF' da Lista de Restritos\n");
+                Console.WriteLine("\n 0 - Sair\n");
+                Console.Write("\nOpção: ");
+                opc = int.Parse(Console.ReadLine()); // opc = int.Parse(ValidarEntrada("menu"));
+
+                switch (opc)
+                {
+                    case 0:
+
+                        TelaInicial();
+
+                        break;
+
+                    case 1:
+
+                        // mostrar na tela toda a lista de cpf's restritos
+
+                        break;
+
+                    case 2:
+
+                        // adicionar um novo cpf nessa lista de restritos
+
+                        break;
+
+                    case 3:
+
+                        // procurar por um cpf especifico nessa lista e se achar deve remove-lo
+
+                        break;
+                }
+
+            } while (true);
+        }
+        static void TelaInicialCnpjRestritos() // falta adicionar as funções aqui (busca,adicionar, retirar, mostrar lista)
+        {
+            int opc = 0;
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("\n'CNPJ' RESTRITOS");
+                Console.WriteLine("\nInforme a Opção Desejada:\n");
+                Console.WriteLine(" 1 - Ver a Lista de 'CNPJ' Restritos\n");
+                Console.WriteLine(" 2 - Adicionar um 'CNPJ' à Lista de Restritos\n");
+                Console.WriteLine(" 3 - Remover um 'CNPJ' da Lista de Restritos\n");
+                Console.WriteLine("\n 0 - Sair\n");
+                Console.Write("\nOpção: ");
+                opc = int.Parse(Console.ReadLine()); // opc = int.Parse(ValidarEntrada("menu"));
+
+                switch (opc)
+                {
+                    case 0:
+
+                        TelaInicial();
+
+                        break;
+
+                    case 1:
+
+                        // mostrar na tela toda a lista de cnpj's restritos
+
+                        break;
+
+                    case 2:
+
+                        // adicionar um novo cnpj nessa lista de restritos
+
+                        break;
+
+                    case 3:
+
+                        // procurar por um cnpj especifico nessa lista e se achar deve remove-lo
+
+                        break;
+                }
+
+            } while (true);
+        }
+        #endregion
+
+        #region TELAS_COMPANHIAS_AEREAS
+        static void TelaInicialCompanhiasAereas() // OK! Só tirar o comentario!
+        {
+            int opc = 0;
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("\nInforme a Opção Desejada:\n");
+                Console.WriteLine(" 1 - Companhia Aéria já cadastrada\n");
+                Console.WriteLine(" 2 - Cadastrar uma Nova Companhia Aérea\n");
+                Console.WriteLine("\n 0 - SAIR\n");
+                Console.Write("\nOpção: ");
+                opc = int.Parse(Console.ReadLine()); // opc = int.Parse(ValidarEntrada("menu"));
+
+                switch (opc)
+                {
+                    case 0:
+
+                        TelaInicial();
+
+                        break;
+
+                    case 1:
+
+                        TelaLoginCompanhiaAerea();
+
+                        break;
+
+                    case 2:
+
+                        TelaCadastrarCompanhiaAerea();
+
+                        break;
+                }
+
+            } while (opc != 0);
+        }
+
+        static void TelaLoginCompanhiaAerea() // OK ~ Falta Acertar o uso das funções e liberar as partes comentadas *
+        {
+            //CompanhiaAerea compAtivo;
+            Console.Clear();
+            Console.WriteLine("\nInforme o 'CNPJ' para Entrar:\n");
+            //compAtivo = ValidarLoginCompanhiaAerea();
+            //if (compAtivo == null)
+            //  {
+            //      Pausa();
+            //      TelaInicialPassageiro();
+            //  }
+
+            TelaOpcoesCompanhiaAerea(/*compAtivo*/); // encontrou um 'CNPJ' valido e existente nos cadastros, então manda para a tela de opções
+        }
+        static void TelaCadastrarCompanhiaAerea()
+        {
+
+        }
+        static void TelaOpcoesCompanhiaAerea(/*CompanhiaAerea compAtivo*/)
+        {
+
+        }
+        #endregion
         #endregion
         static void Pausa() // OK 
         {
