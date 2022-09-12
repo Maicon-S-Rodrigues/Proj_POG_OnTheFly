@@ -113,10 +113,11 @@ namespace Proj_POG_OnTheFly
 
         static void TelaLoginPassageiro() // OK ~ Falta Acertar o uso das funções e liberar as partes comentadas * 
         {
+            string cpf;
             //Passageiro passageiroAtivo;
                 Console.Clear();
                 Console.WriteLine("\nInforme o 'CPF' para Entrar:\n");
-                //passageiroAtivo = ValidarLoginPassageiro();
+                //cpf = ValidarEntrada("cpfexiste");
                 //if (passageiroAtivo == null)
                 //  {
                 //      Pausa();
@@ -430,6 +431,8 @@ namespace Proj_POG_OnTheFly
         #endregion
 
         #region TELAS_COMPANHIAS_AEREAS
+
+        // LEMBRAR DE VERIFICAR OS NOMES DAS LISTAS E FUNÇÕES 'GRAVAR' ***
         static void TelaInicialCompanhiasAereas() // OK! Só tirar o comentario!
         {
             int opc = 0;
@@ -466,26 +469,151 @@ namespace Proj_POG_OnTheFly
 
             } while (opc != 0);
         }
-
-        static void TelaLoginCompanhiaAerea() // OK ~ Falta Acertar o uso das funções e liberar as partes comentadas *
+        static void TelaLoginCompanhiaAerea() // // OK ! Só dar um 'CTRL+K+U' em tudo pra tirar os comentarios
         {
+            //string cnpj;
             //CompanhiaAerea compAtivo;
             Console.Clear();
             Console.WriteLine("\nInforme o 'CNPJ' para Entrar:\n");
-            //compAtivo = ValidarLoginCompanhiaAerea();
-            //if (compAtivo == null)
+            //cnpj = ValidarEntrada("cnpj");
+            //if(cnpj == null) TelaInicialCompanhiasAereas();
+            //
+            //foreach (CompanhiaAerea existente in ListCompanhiaAerea)
+            //{
+            //if(existente.Cnpj == cnpj)
             //  {
-            //      Pausa();
-            //      TelaInicialPassageiro();
+            //      compAtivo = existente;
+            //      TelaOpcoesCompanhiaAerea(/*compAtivo*/); // encontrou um 'CNPJ' valido e existente nos cadastros, então manda para a tela de opções
             //  }
+            //}            
 
-            TelaOpcoesCompanhiaAerea(/*compAtivo*/); // encontrou um 'CNPJ' valido e existente nos cadastros, então manda para a tela de opções
         }
-        static void TelaCadastrarCompanhiaAerea()
+        static void TelaCadastrarCompanhiaAerea() // OK ! Só dar um 'CTRL+K+U' em tudo pra tirar os comentarios
+        {
+            do
+            {
+                string nomeComp;
+                string cnpj;
+                string dataAbertura;
+                // enviar nos parametros (date.now para datacadastro e situacao 'A')
+                //CompanhiaAerea novaComp;
+
+                //nomeComp = ValidarEntrada("nome");
+                //if (nomeComp == null) TelaInicialCompanhiasAereas();
+                //cnpj = ValidarEntrada("cnpj");
+                //if (cnpj == null) TelaInicialCompanhiasAereas();
+                //dataAbertura = ValidarEntrada("dataabertura");
+                //if (dataAbertura == null) TelaInicialCompanhiasAereas();
+
+                //novaComp = new CompanhiaAerea(cnpj, nomeComp, DateConverter(dataAbertura),System.DateTime.Now, System.DateTime.Now, 'A');
+                //listCompanhia.Add(novaComp);
+                //GravarCompanhia(listCompanhia);
+
+
+
+            } while (true);
+        }
+        static void TelaOpcoesCompanhiaAerea(/*CompanhiaAerea compAtivo*/) // Ok ~ Só tirar os comentarios
+        {
+            int opc = 0;
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("\nCompanhia Aérea " /* + compAtivo.RazaoSocial*/);
+                Console.WriteLine("\nPor Favor, informe a Opção Desejada:\n");
+                Console.WriteLine(" 1 - Cadastrar uma nova Aeronave\n");
+                Console.WriteLine(" 2 - Programar um novo Voo\n");
+                Console.WriteLine(" 4 - Ver a Lista de Aeronaves Cadastradas\n");
+                Console.WriteLine(" 3 - Ver a Lista de Voos Cadastrados\n");               
+                Console.WriteLine("\n 0 - Encerrar Sessão\n");
+                opc = int.Parse(Console.ReadLine()); // opc = int.Parse(ValidarEntrada("menu"));
+
+                switch(opc)
+                {
+                    case 0:
+
+                        TelaInicialCompanhiasAereas();
+
+                        break;
+
+                    case 1:
+
+                        TelaCadastrarAeronave();
+
+                        break;
+
+                    case 2:
+
+                        TelaCadastrarVoo();
+
+                        break;
+
+                    case 3:
+
+                        TelaVerAeronavesCadastradas();
+
+                        break;
+
+                    case 4:
+
+                        TelaVerVoosCadastrados();
+
+                        break;
+                }
+
+
+            } while (true);
+        }
+        static void TelaCadastrarAeronave() // OK ! Só dar um 'CTRL+K+U' em tudo pra tirar os comentarios
+        {
+            do
+            {
+                string idAeronave;
+                int capacidade;
+                // enviar os assentos ocupados por parametro como '0';
+                // enviar nos parametros (system.datetime.now para ultima venda e data cadastro)
+                char situacao;
+                //Aeronave novaAeronave;
+
+                //idAeronave = ValidarEntrada("idaeronave");
+                //if (idAeronave == null) TelaOpcoesCompanhiaAerea(/*CompanhiaAerea compAtivo*/);
+                //capacidade = int.Parse(ValidarEntrada("capacidade"));
+                //if (capacidade == null) TelaOpcoesCompanhiaAerea(/*CompanhiaAerea compAtivo*/);
+                //situacao = char.Parse(ValidarEntrada("situacao"));
+                //if (situacao.Equals(null)) TelaInicialCompanhiasAereas();
+
+                //novaAeronave = new Aeronave(idAeronave, capacidade, 0, System.DateTime.Now, System.DateTime.Now, situacao);
+                //listAeronave.Add(novaAeronave);
+                //GravarAeronaves(listAeronave);
+
+            } while (true);
+        }
+        static void TelaCadastrarVoo() // OK ! Só dar um 'CTRL+K+U' em tudo pra tirar os comentarios
+        {
+            string idVoo;
+            string destino;
+            string idAeronave;
+            DateTime dataVoo;///data e hora
+            //Voo novoVoo;
+
+            //idVoo = GeradorId("idvoo");
+            //if (idVoo == null) TelaOpcoesCompanhiaAerea(/*CompanhiaAerea compAtivo*/);
+
+            //destino = ValidarEntrada("destino");
+            //if (destino == null) TelaOpcoesCompanhiaAerea(/*CompanhiaAerea compAtivo*/);
+
+            //idAeronave = ValidarEntrada("aeronave");
+            //if (idAeronave == null) TelaInicialCompanhiasAereas();
+
+            //novoVoo = new Voo(idVoo, destino, idAeronave, DateTime dataVoo, System.DateTime.Now, 'A');
+            //listVoo.Add(novoVoo);
+            //GravarVoo(listVoo);
+        }
+        static void TelaVerAeronavesCadastradas()
         {
 
         }
-        static void TelaOpcoesCompanhiaAerea(/*CompanhiaAerea compAtivo*/)
+        static void TelaVerVoosCadastrados()
         {
 
         }
