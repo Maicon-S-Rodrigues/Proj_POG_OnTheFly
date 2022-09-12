@@ -112,8 +112,6 @@ namespace Proj_POG_OnTheFly
         static void TelaLoginPassageiro() // OK ~ Falta Acertar o uso das funções e liberar as partes comentadas * 
         {
             //Passageiro passageiroAtivo;
-            do
-            {
                 Console.Clear();
                 Console.WriteLine("\nInforme o 'CPF' para Entrar:\n");
                 //passageiroAtivo = ValidarLoginPassageiro();
@@ -124,9 +122,6 @@ namespace Proj_POG_OnTheFly
                 //  }
 
                 TelaOpcoesPassageiro(/*passageiroAtivo*/); // encontrou um 'CPF' valido e existente nos cadastros, então manda para a tela de opções.
-
-
-            } while (true);
         }
 
         static void TelaOpcoesPassageiro(/*Passageiro passageiroAtivo*/) // OK ~ Falta Acertar o uso das funções e liberar as partes comentadas * 
