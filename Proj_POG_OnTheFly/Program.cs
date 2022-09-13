@@ -48,6 +48,13 @@ namespace Proj_POG_OnTheFly
                     case 3:
 
                         // Chamar a tela de entrada para as vendas
+                        string validarLogin = ValidarEntrada("cpflogin");
+                        if (validarLogin == null) TelaInicialPassageiros(passageiroAtivo);
+
+                        else if (validarLogin == passageiroAtivo.Cpf)
+                        {
+                            TelaVendas(passageiroAtivo);
+                        }
 
                         break;
 
@@ -110,95 +117,26 @@ namespace Proj_POG_OnTheFly
 
             } while (opc != 0);
         }
-
         static void TelaLoginPassageiro() // OK ~ Falta Acertar o uso das funções e liberar as partes comentadas * 
         {
             string cpf;
-            //Passageiro passageiroAtivo;
-                Console.Clear();
-                Console.WriteLine("\nInforme o 'CPF' para Entrar:\n");
-                //cpf = ValidarEntrada("cpfexiste");
-                //if (passageiroAtivo == null)
-                //  {
-                //      Pausa();
-                //      TelaInicialPassageiro();
-                //  }
-
-                TelaOpcoesPassageiro(/*passageiroAtivo*/); // encontrou um 'CPF' valido e existente nos cadastros, então manda para a tela de opções.
-        }
-
-        static void TelaOpcoesPassageiro(/*Passageiro passageiroAtivo*/) // OK ~ Falta Acertar o uso das funções e liberar as partes comentadas * 
-        {
-            int opc;
-            do
+            Passageiro passageiroAtivo;
+            Console.Clear();
+            cpf = ValidarEntrada("cpfexiste");
+            if (passageiroAtivo == null)
             {
-                Console.Clear();
-                Console.WriteLine("\nOPÇÕES PARA O PASSAGEIRO: " /* + passageiroAtivo.Nome*/);
-                Console.WriteLine("\nEscolha a Opção Desejada:\n");
-                Console.WriteLine(" 1 - Editar Cadastro\n");
-                Console.WriteLine(" 2 - Comprar Passagem\n");
-                Console.WriteLine("\n 0 - SAIR\n");
-                Console.Write("\nOpção: ");
-                opc = int.Parse(Console.ReadLine()); // opc = ValidarEntrada("menu");
-
-                switch (opc)
+                Pausa();
+                TelaInicialPassageiro();
+            }
+            foreach (Passageiro passageiro in ListPassageiro)
+            {
+                if (passageiro.Cpf == cpf)
                 {
-                    case 0:
-
-                        TelaInicialPassageiros(); // escolheu sair, volta para a tela inicial de passageiros
-
-                        break;
-
-                    case 1:
-
-                        TelaEditarPassageiro(/*Passageiro passageiroAtivo*/); // abre os dados do passageiro em questão para escolher quais quer editar
-
-                        break;
-
-                    case 2:
-
-                        //bool restrito = false;
-                        //bool maiorDe18 = false;
-                        //string cpf = passageiroAtivo.Cpf;
-                        //DateTime nascimento = passageiroAtivo.DataNascimento;
-
-                        // maiorDe18 = VerificarMaiorDe18(nascimento);
-                        // if (maiorDe18 == false)
-                        // {
-                        //      Console.Clear();
-                        //      Console.WriteLine("\nImpossível acessar Area de Vendas com Passageiro menor de 18 anos!");
-                        //      Pausa();
-                        //      TelaOpcoesPassageiro(passageiroAtivo);
-                        // }
-                        // 
-                        // restrito = VerificarCpfRestrito("cpf");
-                        // if (restrito == false)
-                        // {
-                        //      Console.Clear();
-                        //      Console.WriteLine("\nAcesso à area de Vendas está 'RESTRITA' para esse 'CPF'!");
-                        //      Pausa();
-                        //      TelaOpcoesPassageiro(passageiroAtivo);
-                        // }
-
-                        // if (restrito == true && maiorDe18 == true)
-                        //{
-                        //      TelaInicialVendas();
-                        //}
-
-                        break;
+                    passageiroAtivo = passageiro;
+                    TelaEditarPassageiro(passageiroAtivo); // encontrou um 'CPF' valido e existente nos cadastros, então manda para a tela de opções.
                 }
-
-            } while (true);
-            // case 2:
-            //
-            // validar se o Passageiro com esse CPF é maior de 18 anos
-            //
-            // validar se o CPF está na lista de bloqueados
-            //
-            // se as duas condições acima forem verdadeiras (é maior de 18 e não está na lista de bloqueados)
-            // segue para as vendas ||| se uma das duas não for verdadeira retornara para tela anterior depois de uma mensagem com o motivo.
+            }
         }
-
         static void TelaCadastrarPassageiro() // OK ! Só dar um 'CTRL+K+U' em tudo pra tirar os comentarios 
         {
             do
@@ -231,7 +169,6 @@ namespace Proj_POG_OnTheFly
 
             } while (true);
         }
-
         static void TelaEditarPassageiro(/*Passageiro passageiroAtivo*/) // OK ~ Falta Acertar o uso das funções e liberar as partes comentadas * 
         {
             int opc;
@@ -258,7 +195,7 @@ namespace Proj_POG_OnTheFly
                 {
                     case 0:
 
-                        TelaOpcoesPassageiro(/*Passageiro passageiroAtivo*/);
+                        TelaInicialPassageiros(/*Passageiro passageiroAtivo*/);
 
                         break;
 
@@ -532,31 +469,31 @@ namespace Proj_POG_OnTheFly
                 {
                     case 0:
 
-                        TelaInicialCompanhiasAereas();
+                        TelaInicialCompanhiasAereas(/*compAtivo*/);
 
                         break;
 
                     case 1:
 
-                        TelaCadastrarAeronave();
+                        TelaCadastrarAeronave(/*compAtivo*/);
 
                         break;
 
                     case 2:
 
-                        TelaCadastrarVoo();
+                        TelaCadastrarVoo(/*compAtivo*/);
 
                         break;
 
                     case 3:
 
-                        TelaVerAeronavesCadastradas();
+                        TelaVerAeronavesCadastradas(/*compAtivo*/);
 
                         break;
 
                     case 4:
 
-                        TelaVerVoosCadastrados();
+                        TelaVerVoosCadastrados(/*compAtivo*/);
 
                         break;
                 }
@@ -564,52 +501,83 @@ namespace Proj_POG_OnTheFly
 
             } while (true);
         }
-        static void TelaCadastrarAeronave() // OK ! Só dar um 'CTRL+K+U' em tudo pra tirar os comentarios
+        static void TelaCadastrarAeronave(/*CompanhiaAerea compAtivo*/) // OK ! Só dar um 'CTRL+K+U' em tudo pra tirar os comentarios
         {
-            do
-            {
                 string idAeronave;
                 int capacidade;
                 // enviar os assentos ocupados por parametro como '0';
                 // enviar nos parametros (system.datetime.now para ultima venda e data cadastro)
                 char situacao;
-                //Aeronave novaAeronave;
+            //Aeronave novaAeronave;
 
-                //idAeronave = ValidarEntrada("idaeronave");
-                //if (idAeronave == null) TelaOpcoesCompanhiaAerea(/*CompanhiaAerea compAtivo*/);
-                //capacidade = int.Parse(ValidarEntrada("capacidade"));
-                //if (capacidade == null) TelaOpcoesCompanhiaAerea(/*CompanhiaAerea compAtivo*/);
-                //situacao = char.Parse(ValidarEntrada("situacao"));
-                //if (situacao.Equals(null)) TelaInicialCompanhiasAereas();
+            //idAeronave = ValidarEntrada("idaeronave");
+            //if (idAeronave == null) TelaOpcoesCompanhiaAerea(/*compAtivo*/);
+            //capacidade = int.Parse(ValidarEntrada("capacidade"));
+            //if (capacidade == null) TelaOpcoesCompanhiaAerea(/*compAtivo*/);
+            //situacao = char.Parse(ValidarEntrada("situacao"));
+            //if (situacao.Equals(null)) TelaOpcoesCompanhiaAerea(/*compAtivo*/);
 
-                //novaAeronave = new Aeronave(idAeronave, capacidade, 0, System.DateTime.Now, System.DateTime.Now, situacao);
-                //listAeronave.Add(novaAeronave);
-                //GravarAeronaves(listAeronave);
-
-            } while (true);
+            //novaAeronave = new Aeronave(idAeronave, capacidade, 0, System.DateTime.Now, System.DateTime.Now, situacao);
+            //listAeronave.Add(novaAeronave);
+            //GravarAeronaves(listAeronave);
+            Console.WriteLine("\nCadastro Realizado com Sucesso!");
+            Pausa();
+            TelaOpcoesCompanhiaAerea(/*compAtivo*/);
         }
-        static void TelaCadastrarVoo() // OK ! Só dar um 'CTRL+K+U' em tudo pra tirar os comentarios
+        static void TelaCadastrarVoo(/*CompanhiaAerea compAtivo*/) // OK ! Só dar um 'CTRL+K+U' em tudo pra tirar os comentarios
         {
+            Console.Clear();
             string idVoo;
             string destino;
             string idAeronave;
+            string idPassagem;
+            string auxData;
             DateTime dataVoo;///data e hora
+            float valor;
             //Voo novoVoo;
 
             //idVoo = GeradorId("idvoo");
-            //if (idVoo == null) TelaOpcoesCompanhiaAerea(/*CompanhiaAerea compAtivo*/);
+            //if (idVoo == null) TelaOpcoesCompanhiaAerea(/*compAtivo*/);
 
             //destino = ValidarEntrada("destino");
-            //if (destino == null) TelaOpcoesCompanhiaAerea(/*CompanhiaAerea compAtivo*/);
+            //if (destino == null) TelaOpcoesCompanhiaAerea(/*compAtivo*/);
 
             //idAeronave = ValidarEntrada("aeronave");
-            //if (idAeronave == null) TelaInicialCompanhiasAereas();
+            //if (idAeronave == null) TelaOpcoesCompanhiaAerea(/*compAtivo*/);
 
-            //novoVoo = new Voo(idVoo, destino, idAeronave, DateTime dataVoo, System.DateTime.Now, 'A');
+            //auxData = ValidarEntrada("datavoo");
+            //if(auxData == null) TelaOpcoesCompanhiaAerea(/*compAtivo*/);
+            //dataVoo = DateHourConverter(auxData));
+
+            //valor = float.Parse(ValidarEntrada("valorpassagem"));
+            //if (valor == null) TelaOpcoesCompanhiaAerea(/*compAtivo*/);
+
+            //novoVoo = new Voo(GeradorId("idvoo"), destino, idAeronave, dataVoo, System.DateTime.Now, 'A');
             //listVoo.Add(novoVoo);
             //GravarVoo(listVoo);
+            Console.WriteLine("\nCadastro Realizado com Sucesso!");
+            Pausa();
+            TelaOpcoesCompanhiaAerea(/*compAtivo*/);
         }
-        static void TelaVerAeronavesCadastradas()
+        static void TelaVerAeronavesCadastradas(/*CompanhiaAerea compAtivo*/)
+        {
+            //Console.Clear();
+            //foreach (Aeronave aeroNave in listAeronave)
+            //{
+            //    Console.WriteLine("ID: " + aeroNave.Inscricao + "Situação: " + aeroNave.Situacao);
+            //}
+            //Console.WriteLine("\n-----------------------------------------------------------------");
+            //Console.Write("\nInforme o ID da Aeronave que deseja ver os detalhes: ");
+            //string aeronave = ValidarEntrada("aeronave");
+            //if (aeronave == null) TelaOpcoesCompanhiaAerea(/*compAtivo*/);
+
+            //foreach (Aeronave aeroNave in listAeronave)
+            //{
+            //    if (aeroNave.Inscricao == aeronave)
+            //        TelaEditarAeronave(compAtivo, aeroNave);
+            //}
+        }
+        static void TelaEditarAeronave(/*CompanhiaAerea compAtivo, Aeronave aeroNave*/)
         {
 
         }
